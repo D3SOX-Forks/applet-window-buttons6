@@ -9,21 +9,28 @@ set(AUTHOR "Michail Vourlakos")
 set(EMAIL "mvourlakos@gmail.com")
 
 set(QT_MIN_VERSION "6.6.0")
-set(KF6_MIN_VERSION "5.246.0")
+set(KF6_MIN_VERSION "6.0.0")
+set(PLASMA_MIN_VERSION "6.0.0")
 set(KDecoration3_MIN_VERSION "6.2.90")
 
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
-find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED NO_MODULE COMPONENTS DBus Gui Qml Quick)
-find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Config Declarative Package Svg)
-find_package(Plasma "5.90" REQUIRED)
-find_package(KDecoration3 ${KDecoration3_MIN_VERSION} REQUIRED)
-
 include(ECMFindQmlModule)
 include(CheckIncludeFiles)
-include(KDECMakeSettings)
 include(KDEInstallDirs)
+include(KDECMakeSettings)
+
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED NO_MODULE COMPONENTS DBus Gui Qml Quick)
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS CoreAddons Config Declarative Package Svg)
+find_package(Plasma ${PLASMA_MIN_VERSION} CONFIG QUIET)
+if(NOT Plasma_FOUND)
+    message(FATAL_ERROR
+        "Missing Plasma development files. Install the Plasma 6 development package "
+        "that provides PlasmaConfig.cmake (for example Debian/Ubuntu: libkf6plasma-dev, "
+        "Fedora: libplasma-devel, Arch: plasma-framework, Void: libplasma-devel).")
+endif()
+find_package(KDecoration3 ${KDecoration3_MIN_VERSION} REQUIRED)
 
 set(KDecoration3_VERSION_MAJOR ${KDecoration3_VERSION_MAJOR})
 set(KDecoration3_VERSION_MINOR ${KDecoration3_VERSION_MINOR})
