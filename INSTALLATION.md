@@ -20,6 +20,14 @@ sudo pacman -Syu
 sudo pacman -S gcc extra-cmake-modules plasma-framework gettext kdecoration
 ```
 
+- Void:
+```
+sudo xbps-install -S gcc cmake extra-cmake-modules qt6-base-devel qt6-declarative-devel \
+    kf6-kcmutils-devel kf6-kconfig-devel kf6-kconfigwidgets-devel kf6-kcoreaddons-devel \
+    kf6-kdeclarative-devel kf6-ki18n-devel kf6-kpackage-devel kf6-kservice-devel \
+    kf6-ksvg-devel kf6-kdecoration-devel gettext libplasma-devel
+```
+
 ### Building and Installing
 Once you have installed the dependencies listed above you can execute the build and install script:
 

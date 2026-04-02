@@ -8,8 +8,9 @@
 # Ignore patches
 *.patch~
 
-# build directory
+# build directories
 build/
+build-test/
 
 # backup files
 *.autosave
